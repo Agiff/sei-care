@@ -237,4 +237,135 @@ class PatientController extends ControllerBase
             'action' => "index"
         ]);
     }
+
+    public function getPatientsAction()
+    {
+        $patients = Patient::find();
+        $response = [
+            'status' => [
+                'code' => 200,
+                'response' => 'success',
+                'message' => 'Success fetch patients'
+            ],
+            'result' => $patients
+        ];
+        return $this->response->setJsonContent($response);
+    }
+
+    public function createPatientAction()
+    {
+        $jsonData = $this->request->getJsonRawBody();
+        $patient = new Patient();
+        $patient->name = $jsonData->name;
+        $patient->sex = $jsonData->sex;
+        $patient->religion = $jsonData->religion;
+        $patient->phone = $jsonData->phone;
+        $patient->address = $jsonData->address;
+        $patient->nik = $jsonData->nik;
+        $patient->save();
+
+        $response = [
+            'status' => [
+                'code' => 201,
+                'response' => 'success',
+                'message' => 'Patient created'
+            ],
+            'result' => $patient
+        ];
+
+        return $this->response->setJsonContent($response)->setStatusCode(201);
+    }
+
+
+    public function getPatientByIdAction()
+    {
+        $id = $this->dispatcher->getParam('id');
+        $patient = Patient::findFirstByid($id);
+
+        if (!$patient) {
+            $response = [
+                'status' => [
+                    'code' => 404,
+                    'response' => 'failed',
+                    'message' => 'Data not found'
+                ],
+                'result' => null
+            ];
+            return $this->response->setJsonContent($response)->setStatusCode(404);
+        }
+
+        $response = [
+            'status' => [
+                'code' => 200,
+                'response' => 'success',
+                'message' => 'Success fetch patient detail'
+            ],
+            'result' => $patient
+        ];
+        return $this->response->setJsonContent($response);
+    }
+
+    public function updatePatientAction()
+    {
+        $id = $this->dispatcher->getParam('id');
+        $patient = Patient::findFirstByid($id);
+        if (!$patient) {
+            $response = [
+                'status' => [
+                    'code' => 404,
+                    'response' => 'failed',
+                    'message' => 'Data not found'
+                ],
+                'result' => null
+            ];
+            return $this->response->setJsonContent($response)->setStatusCode(404);
+        }
+
+        $jsonData = $this->request->getJsonRawBody();
+        $patient->name = $jsonData->name ?? $patient->name;
+        $patient->sex = $jsonData->sex ?? $patient->sex;
+        $patient->religion = $jsonData->religion ?? $patient->religion;
+        $patient->phone = $jsonData->phone ?? $patient->phone;
+        $patient->address = $jsonData->address ?? $patient->address;
+        $patient->nik = $jsonData->nik ?? $patient->nik;
+        $patient->save();
+
+        $response = [
+            'status' => [
+                'code' => 200,
+                'response' => 'success',
+                'message' => 'Patient updated'
+            ],
+            'result' => $patient
+        ];
+        return $this->response->setJsonContent($response);
+    }
+
+    public function deletePatientAction()
+    {
+        $id = $this->dispatcher->getParam('id');
+        $patient = Patient::findFirstByid($id);
+        if (!$patient) {
+            $response = [
+                'status' => [
+                    'code' => 404,
+                    'response' => 'failed',
+                    'message' => 'Data not found'
+                ],
+                'result' => null
+            ];
+            return $this->response->setJsonContent($response)->setStatusCode(404);
+        }
+        $patient->delete();
+
+        $response = [
+            'status' => [
+                'code' => 200,
+                'response' => 'success',
+                'message' => 'Patient deleted'
+            ],
+            'result' => $patient
+        ];
+        return $this->response->setJsonContent($response);
+    }
 }
