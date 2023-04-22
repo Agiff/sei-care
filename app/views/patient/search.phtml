@@ -7,8 +7,8 @@
 <div class="row">
     <nav>
         <ul class="pager">
-            <li class="previous"><?php echo $this->tag->linkTo(["patient/index", "Go Back"]); ?></li>
-            <li class="next"><?php echo $this->tag->linkTo(["patient/new", "Create "]); ?></li>
+            <li class="previous"><?php echo $this->tag->linkTo(["/patient/index", "Go Back"]); ?></li>
+            <li class="next"><?php echo $this->tag->linkTo(["/patient/new", "Create "]); ?></li>
         </ul>
     </nav>
 </div>
@@ -46,8 +46,8 @@
             <td><?php echo $patient['address']; ?></td>
             <td><?php echo $patient['nik']; ?></td>
 
-                <td><?php echo $this->tag->linkTo(["patient/edit/" . $patient['id'], "Edit"]); ?></td>
-                <td><?php echo $this->tag->linkTo(["patient/delete/" . $patient['id'], "Delete"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["/patient/edit/" . $patient['id'], "Edit"]); ?></td>
+                <td><?php echo $this->tag->linkTo(["/patient/delete/" . $patient['id'], "Delete"]); ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -63,10 +63,10 @@
     <div class="col-sm-11">
         <nav>
             <ul class="pagination">
-                <li><?php echo $this->tag->linkTo(["patient/search", "First", 'class' => 'page-link', 'id' => 'first']) ?></li>
-                <li><?php echo $this->tag->linkTo(["patient/search?page=" . $page->getPrevious(), "Previous", 'class' => 'page-link', 'id' => 'previous']) ?></li>
-                <li><?php echo $this->tag->linkTo(["patient/search?page=" . $page->getNext(), "Next", 'class' => 'page-link', 'id' => 'next']) ?></li>
-                <li><?php echo $this->tag->linkTo(["patient/search?page=" . $page->getLast(), "Last", 'class' => 'page-link', 'id' => 'last']) ?></li>
+                <li><?php echo $this->tag->linkTo(["/patient/search", "First", 'class' => 'page-link', 'id' => 'first']) ?></li>
+                <li><?php echo $this->tag->linkTo(["/patient/search?page=" . $page->getPrevious(), "Previous", 'class' => 'page-link', 'id' => 'previous']) ?></li>
+                <li><?php echo $this->tag->linkTo(["/patient/search?page=" . $page->getNext(), "Next", 'class' => 'page-link', 'id' => 'next']) ?></li>
+                <li><?php echo $this->tag->linkTo(["/patient/search?page=" . $page->getLast(), "Last", 'class' => 'page-link', 'id' => 'last']) ?></li>
             </ul>
         </nav>
     </div>

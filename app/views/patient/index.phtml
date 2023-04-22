@@ -6,14 +6,14 @@
 
 <div class="page-header">
     <h1>Search patient</h1>
-    <p><?php echo $this->tag->linkTo(["patient/new", "Create patient"]) ?></p>
+    <p><?php echo $this->tag->linkTo(["/patient/new", "Create patient"]) ?></p>
 </div>
 
 <?php echo $this->getContent() ?>
 
 <?php echo $this->flash->output() ?>
 
-<form action="patient/search" class="form-horizontal" method="get">
+<form action="/patient/search" class="form-horizontal" method="get">
     <div class="form-group">
     <label for="fieldId" class="col-sm-2 control-label">Id</label>
     <div class="col-sm-10">
