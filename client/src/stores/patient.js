@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import { failureAlert, successAlert } from '../helpers';
 
 export const usePatientStore = defineStore('patient', {
   state: () => ({
@@ -16,7 +17,7 @@ export const usePatientStore = defineStore('patient', {
         const { data } = await axios.get(`${this.baseUrl}/patients/api`);
         this.patients = data.result;
       } catch (error) {
-        console.log(error);
+        failureAlert(error.response.data.status.code, error.response.data.status.message);
       }
     },
     async fetchPatientDetail(id) {
@@ -24,7 +25,7 @@ export const usePatientStore = defineStore('patient', {
         const { data } = await axios.get(`${this.baseUrl}/patients/api/${id}`);
         this.patientDetail = data.result;
       } catch (error) {
-        console.log(error);
+        failureAlert(error.response.data.status.code, error.response.data.status.message);
       }
     },
     async createPatient(input) {
@@ -33,8 +34,9 @@ export const usePatientStore = defineStore('patient', {
         await this.fetchPatients();
         console.log(data);
         this.router.back();
+        successAlert('Patient added');
       } catch (error) {
-        console.log(error);
+        failureAlert(error.response.data.status.code, error.response.data.status.message);
       }
     },
     async deletePatient(id) {
@@ -42,8 +44,9 @@ export const usePatientStore = defineStore('patient', {
         const { data } = await axios.delete(`${this.baseUrl}/patients/api/delete/${id}`);
         await this.fetchPatients();
         console.log(data);
+        successAlert('Patient removed');
       } catch (error) {
-        console.log(error);
+        failureAlert(error.response.data.status.code, error.response.data.status.message);
       }
     },
     async updatePatient(input, id) {
@@ -52,8 +55,9 @@ export const usePatientStore = defineStore('patient', {
         await this.fetchPatients();
         console.log(data);
         this.router.back();
+        successAlert('Patient updated');
       } catch (error) {
-        console.log(error);
+        failureAlert(error.response.data.status.code, error.response.data.status.message);
       }
     },
   },

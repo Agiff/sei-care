@@ -1,6 +1,7 @@
 <script>
   import { mapActions, mapState } from 'pinia';
   import { usePatientStore } from '../stores/patient';
+  import Swal from 'sweetalert2';
 
   export default {
     name: 'HomePage',
@@ -8,7 +9,22 @@
       ...mapState(usePatientStore, ['patients'])
     },
     methods: {
-      ...mapActions(usePatientStore, ['fetchPatients', 'deletePatient'])
+      ...mapActions(usePatientStore, ['fetchPatients', 'deletePatient']),
+      onDelete(id) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.deletePatient(id)
+          }
+        })
+      }
     },
     created() {
       this.fetchPatients();
@@ -47,7 +63,7 @@
             <td class="align-middle">
               <button type="button" class="btn btn-primary my-2" @click="$router.push(`/${patient.id}`)">See Details</button>
               <button type="button" class="btn btn-success my-2 mx-2" @click="$router.push(`/edit/${patient.id}`)">Edit</button>
-              <button type="button" class="btn btn-danger my-2" @click="deletePatient(patient.id)">Delete</button>
+              <button type="button" class="btn btn-danger my-2" @click="onDelete(patient.id)">Delete</button>
             </td>
           </tr>
         </tbody>
