@@ -45,7 +45,7 @@
             <td class="align-middle">{{ patient.address }}</td>
             <td class="align-middle">{{ patient.nik }}</td>
             <td class="align-middle">
-              <button type="button" class="btn btn-primary my-2">See Details</button>
+              <button type="button" class="btn btn-primary my-2" @click="$router.push(`/${patient.id}`)">See Details</button>
               <button type="button" class="btn btn-success my-2 mx-2">Edit</button>
               <button type="button" class="btn btn-danger my-2">Delete</button>
             </td>

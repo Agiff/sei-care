@@ -4,7 +4,8 @@ import axios from 'axios';
 export const usePatientStore = defineStore('patient', {
   state: () => ({
     baseUrl: 'http://localhost:8000',
-    patients: []
+    patients: [],
+    patientDetail : {}
   }),
   getters: {
     doubleCount: (state) => state.count * 2,
@@ -12,8 +13,16 @@ export const usePatientStore = defineStore('patient', {
   actions: {
     async fetchPatients() {
       try {
-        const { data } = await axios.get(this.baseUrl + '/patients/api');
+        const { data } = await axios.get(`${this.baseUrl}/patients/api`);
         this.patients = data.result;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async fetchPatientDetail(id) {
+      try {
+        const { data } = await axios.get(`${this.baseUrl}/patients/api/${id}`);
+        this.patientDetail = data.result;
       } catch (error) {
         console.log(error);
       }
