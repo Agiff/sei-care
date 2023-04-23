@@ -12,8 +12,16 @@ class PatientController extends ControllerBase
     public function initialize()
     {
         $this->response->setHeader('Access-Control-Allow-Origin', '*');
-        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
         $this->response->setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+        if ($this->request->getMethod() == 'OPTIONS') {
+            $this->response->setStatusCode(200);
+            $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT, OPTIONS');
+            $this->response->setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+            $this->response->send();
+            exit;
+        }
     }
 
     /**

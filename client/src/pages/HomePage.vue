@@ -8,7 +8,7 @@
       ...mapState(usePatientStore, ['patients'])
     },
     methods: {
-      ...mapActions(usePatientStore, ['fetchPatients'])
+      ...mapActions(usePatientStore, ['fetchPatients', 'deletePatient'])
     },
     created() {
       this.fetchPatients();
@@ -47,7 +47,7 @@
             <td class="align-middle">
               <button type="button" class="btn btn-primary my-2" @click="$router.push(`/${patient.id}`)">See Details</button>
               <button type="button" class="btn btn-success my-2 mx-2">Edit</button>
-              <button type="button" class="btn btn-danger my-2">Delete</button>
+              <button type="button" class="btn btn-danger my-2" @click="deletePatient(patient.id)">Delete</button>
             </td>
           </tr>
         </tbody>

@@ -20,7 +20,6 @@ import { usePatientStore } from '../stores/patient';
       ...mapActions(usePatientStore, ['createPatient']),
       submitInput() {
         this.createPatient(this.patientInput);
-        this.$router.push('/');
       }
     }
   }

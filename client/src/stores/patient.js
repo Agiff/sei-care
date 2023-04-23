@@ -30,10 +30,21 @@ export const usePatientStore = defineStore('patient', {
     async createPatient(input) {
       try {
         const { data } = await axios.post(`${this.baseUrl}/patients/api/create`, input);
+        await this.fetchPatients();
+        console.log(data);
+        this.router.push('/');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deletePatient(id) {
+      try {
+        const { data } = await axios.delete(`${this.baseUrl}/patients/api/delete/${id}`);
+        await this.fetchPatients();
         console.log(data);
       } catch (error) {
         console.log(error);
       }
-    }
+    },
   },
 })
