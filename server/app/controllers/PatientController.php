@@ -9,6 +9,13 @@ use Phalcon\Paginator\Adapter\Model;
 
 class PatientController extends ControllerBase
 {
+    public function initialize()
+    {
+        $this->response->setHeader('Access-Control-Allow-Origin', '*');
+        $this->response->setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        $this->response->setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    }
+
     /**
      * Index action
      */
