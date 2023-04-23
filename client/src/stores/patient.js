@@ -32,7 +32,7 @@ export const usePatientStore = defineStore('patient', {
         const { data } = await axios.post(`${this.baseUrl}/patients/api/create`, input);
         await this.fetchPatients();
         console.log(data);
-        this.router.push('/');
+        this.router.back();
       } catch (error) {
         console.log(error);
       }
@@ -51,7 +51,7 @@ export const usePatientStore = defineStore('patient', {
         const { data } = await axios.put(`${this.baseUrl}/patients/api/update/${id}`, input);
         await this.fetchPatients();
         console.log(data);
-        this.router.push('/');
+        this.router.back();
       } catch (error) {
         console.log(error);
       }

@@ -77,6 +77,7 @@ import { usePatientStore } from '../stores/patient';
       </div>
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary"> {{ this.$route.params.id ? 'Edit' : 'Add' }} </button>
+        <button type="button" class="btn btn-secondary" @click="$router.back()">Back</button>
       </div>
     </form>
   </div>
