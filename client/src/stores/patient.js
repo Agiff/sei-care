@@ -46,5 +46,15 @@ export const usePatientStore = defineStore('patient', {
         console.log(error);
       }
     },
+    async updatePatient(input, id) {
+      try {
+        const { data } = await axios.put(`${this.baseUrl}/patients/api/update/${id}`, input);
+        await this.fetchPatients();
+        console.log(data);
+        this.router.push('/');
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 })

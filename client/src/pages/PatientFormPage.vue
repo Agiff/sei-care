@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { usePatientStore } from '../stores/patient';
 
   export default {
@@ -16,10 +16,23 @@ import { usePatientStore } from '../stores/patient';
         }
       }
     },
+    computed: {
+      ...mapState(usePatientStore, ['patientDetail'])
+    },
     methods: {
-      ...mapActions(usePatientStore, ['createPatient']),
+      ...mapActions(usePatientStore, ['createPatient', 'fetchPatientDetail', 'updatePatient']),
       submitInput() {
-        this.createPatient(this.patientInput);
+        if (this.$route.params.id) {
+          this.updatePatient(this.patientInput, this.$route.params.id);
+        } else {
+          this.createPatient(this.patientInput);
+        }
+      }
+    },
+    created() {
+      if (this.$route.params.id) {
+        this.fetchPatientDetail(this.$route.params.id)
+          .then(() => this.patientInput = this.patientDetail);
       }
     }
   }
@@ -63,7 +76,7 @@ import { usePatientStore } from '../stores/patient';
         <input type="text" class="form-control" id="nik" v-model="patientInput.nik">
       </div>
       <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary"> {{ this.$route.params.id ? 'Edit' : 'Add' }} </button>
       </div>
     </form>
   </div>

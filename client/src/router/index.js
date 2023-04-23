@@ -12,13 +12,18 @@ const router = createRouter({
       component: HomePage
     },
     {
+      path: '/add',
+      name: 'addPatient',
+      component: PatientFormPage
+    },
+    {
       path: '/:id',
       name: 'patienDetail',
       component: PatientDetailPage
     },
     {
-      path: '/form',
-      name: 'patientForm',
+      path: '/edit/:id',
+      name: 'editPatient',
       component: PatientFormPage
     },
   ]

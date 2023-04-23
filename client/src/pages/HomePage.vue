@@ -21,7 +21,7 @@
     <h1>Home</h1>
     <hr>
     <div>
-      <button type="button" class="btn btn-primary my-2 mt-4 mb-3" @click="$router.push('/form')">Add Patient</button>
+      <button type="button" class="btn btn-primary my-2 mt-4 mb-3" @click="$router.push('/add')">Add Patient</button>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -46,7 +46,7 @@
             <td class="align-middle">{{ patient.nik }}</td>
             <td class="align-middle">
               <button type="button" class="btn btn-primary my-2" @click="$router.push(`/${patient.id}`)">See Details</button>
-              <button type="button" class="btn btn-success my-2 mx-2">Edit</button>
+              <button type="button" class="btn btn-success my-2 mx-2" @click="$router.push(`/edit/${patient.id}`)">Edit</button>
               <button type="button" class="btn btn-danger my-2" @click="deletePatient(patient.id)">Delete</button>
             </td>
           </tr>
