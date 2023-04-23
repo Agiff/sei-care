@@ -21,7 +21,7 @@
     <h1>Home</h1>
     <hr>
     <div>
-      <button type="button" class="btn btn-primary my-2 mt-4 mb-3">Add Patient</button>
+      <button type="button" class="btn btn-primary my-2 mt-4 mb-3" @click="$router.push('/form')">Add Patient</button>
       <table class="table table-hover">
         <thead>
           <tr>
